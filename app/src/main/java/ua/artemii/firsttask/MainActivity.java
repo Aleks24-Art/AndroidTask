@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    public static final String TAG = MainActivity.class.getCanonicalName();
     private static final String YOU_TUBE_URL = "https://www.youtube.com/";
     private static final String THREE_SS_URL = "https://3ss.tv/";
 
@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initButtons();
+    }
+
+    private void initButtons() {
         findViewById(R.id.youtube_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mMyFragment = new MyFragment();
-                getFragmentManager()
+                getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.container, mMyFragment)
-                        .commit();
+                            .addToBackStack(null)
+                                .replace(R.id.container, mMyFragment)
+                                    .commit();
+
                 Log.d(TAG, MyFragment.class.getName() + " was opened");
             }
         });
